@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> The <span> red</span> sun</h1>
+<script>
+    var list=document.getElementsByTagName('h1');
+    console.log(list);
+    for(i=0;i<list.length;i++) {
+        var obj=list.item(i);
+        console.log(obj.innerHTML);
+        obj.innerHTML='<h1> The <span> Red</span> sun </h1>';
+        console.log(obj.innerHTML);
+    }
+
+    // why showing span tab and loop countine runing after add    obj.innerHTML='<h1> The <span> Red</span> sun </h1>';.
+</script>
+
+</body>
+</html>
