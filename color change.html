@@ -14,14 +14,14 @@
     for(i=0;i<list.length;i++) {
         var obj=list.item(i);
         console.log(obj);
-        obj.style.color='yellow';
+
         obj.onclick=myclo(i);
 
     }
     function myclo(i) {
         return function () {
             console.log('item pressed'+i);
-            if(obj.style.color='yellow'){
+            if(obj.style.color=='yellow'){
                 obj.style.color='blue';
             } else {
                 obj.style.color='yellow ';
