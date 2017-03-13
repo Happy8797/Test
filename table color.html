@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        td,tr {
+            padding: 20px;
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+<script>
+    var list=document.getElementsByTagName('td');
+    console.log(list);
+    for(i=0;i<list.length; i++) {
+        var t=list.item(i);
+        t.onClick=myclo(t);
+        console.log(t);
+    }
+    function myclo(obj) {
+        return function () {
+          if(obj.style.backgroundColor=='red') {
+            obj.style.color='white';
+          } else {
+              obj.style.backgroundColor='red';
+          }
+        }
+    }
+</script>
+            // not change color when i clicked.
+</body>
+</html>
