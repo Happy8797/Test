@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+ div {
+     background: url("images/dog.jpg");
+ }
+</style>
+</head>
+<body>
+<h2 class="lion"> click me for Lion Image </h2>
+<h2 class="dog"> click me for Dog Image</h2>
+
+
+<script>
+  var list=document.getElementsByClassName('lion');
+  for(i=0;i<list.length;i++) {
+      var obj=list.item(i);
+      obj.onclick=myclo(obj);
+  }
+  function myclo(obj) {
+      return function () {
+          obj.style.backgroundImage='url("../htdocs/images/lion.jpg")';
+          obj.style.height='500px';
+          obj.style.position='hidden';
+
+      }
+  }
+  var dog=document.getElementsByClassName('dog');
+  for(i=0;i<list.length;i++) {
+      var obj2=dog.item(i);
+      obj2.onclick=myclo1(obj2);
+  }
+  function myclo1(obj2) {
+      return function () {
+          obj2.style.backgroundImage='url("images/dog.jpg")';
+          obj2.style.height='500px';
+      }
+  }
+
+  //how to set no-repeat and padding between text and image. also how to hide text after click.
+</script>
+
+
+</body>
+</html>
