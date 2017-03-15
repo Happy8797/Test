@@ -14,7 +14,11 @@
     }
     function myclo(obj) {
         return function () {
-            obj.style.fontSize='3em';
+            if(obj.style.fontSize=='4em') {
+                obj.style.fontSize='1em';
+            } else {
+                obj.style.fontSize='4em';
+            }
         }
     }
 </script>
