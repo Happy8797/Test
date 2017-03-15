@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+<p> Hello </p>
+
+<script>
+    var list=document.getElementsByTagName('p');
+    for(i=0;i<list.length;i++) {
+        var obj=list.item(i);
+        obj.onclick=myclo(obj);
+    }
+    function myclo(obj) {
+        return function () {
+            obj.style.fontSize='3em';
+        }
+    }
+</script>
+</body>
+</html>
