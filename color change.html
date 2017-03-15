@@ -12,22 +12,23 @@
     var list=document.getElementsByClassName('help');
     console.log(list);
     for(i=0;i<list.length;i++) {
-        var obj=list.item(i);
+        var obj = list.item(i);
         console.log(obj);
 
-        obj.onclick=myclo(i);
-
+        obj.onclick = myclo(i);
     }
-    function myclo(i) {
-        return function () {
-            console.log('item pressed'+i);
-            if(obj.style.color=='yellow'){
-                obj.style.color='blue';
-            } else {
-                obj.style.color='yellow ';
+
+        function myclo(i) {
+            return function () {
+                console.log('item pressed' + i);
+                if (obj.style.color == 'yellow') {
+                    obj.style.color = 'blue';
+                } else {
+                    obj.style.color = 'yellow ';
+                }
             }
         }
-    }
+
     // when i click on first div then change color in div-3.
 </script>
 </body>
