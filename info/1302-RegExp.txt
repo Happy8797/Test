@@ -1,0 +1,123 @@
+Regular Expression Object - RegExp
+==================================
+
+What is Regular Expression?
+
+   It is a tool and APIs to perform search, replace, split the strings based upon the pattern. 
+
+The Regular Expression object uses following characters to create the pattern. These characters are known as character classes.
+
+Char class	Meaning
+-----------------------
+.		It matches any single char
+\d		It matches a digit
+\D		It matches a non digit char
+\w		It matches a word char (alphabet or digit is called word char)
+\W		It matches a non word char
+\s		It matches a whitespace char
+\S		It matches a non whitespace char
+[set]		It matches a char from given set
+		e.g [abc] means any char from a or b or c
+		    [a-z] means any char from a to z
+		    [a-zA-Z0-9,] any char from a to z or A to Z or 0 to 9 or comma
+()		It matches a group
+
+		e.g (Red|Blue|Green) it matches either Red or Green or Blue
+		e.g ( (\d)|(\s) ) - It matches either digit or whitespace
+
+Quantifiers
+===========
+ ?		It matches zero or one
+ *		It matches zero or more
+ + 		It matches one or more
+ {n}		It matches exact n char
+ {n,m}		It matches n to  m char
+
+Boundary marker
+===============
+  ^		It matches begin of the string
+  $		It matches end of the string
+	
+How to create an RegExp object?
+
+  Use / / (two forward slashes) to define the pattern and create an object.
+
+for example,
+
+  var reg = /\d/;   //Pattern to find a digit char in a given string
+  var str = "hello 1st world";
+  console.log( reg.test( str ) ); //returns true if digit is found
+
+Example: Check two digit number exists in a string 
+
+ reg = /\d{2}/;
+ str = "Hello my roll is 45 and my name is Raj";
+ console.log( reg.test(str) );
+ result = reg.exec(str); //Returns an object contains search result
+ console.log( result );  // Returns null if not found
+
+Example: Search a word whose first char is alphabet
+			     second is digit and
+			     last is p or q or r
+
+ reg = /[a-z]\d[pqr]/;
+ str = "The code a3t or z4q";
+ console.log( reg.test( str ) );
+
+Example: Boundary marker to match exact the string
+
+reg = /^\d{6}$/;  //pincode
+console.log( reg.test("3456783") );
+
+reg = /^[a-zA-Z ]+$/;     // name of person that inclues a-z A-Z or space
+str = "Rajesh Shah";
+console.log( reg.test( str ) );
+
+reg = /^[a-zA-Z ]{5,30}$/;  // name that include min 5 and max 30 chars
+console.log( reg.test("Raj") );
+console.log( reg.test("Raj Kumar") );
+
+reg = /(red|blue|green)/; 
+console.log( reg.test("red") );
+console.log( reg.test("the blue lagoon") );
+console.log( reg.test("yelllow color") );
+
+reg = /^(\d|[a-z]|[PQ])$/;
+console.log( reg.test("6") );
+console.log( reg.test("t") );
+console.log( reg.test("Q") );
+
+
+reg = /^(\d|[a-z]{2}|[PQ])$/;  // 1 digit or 2 a-z or 1 PQ
+reg = /^(\d|[a-z]?|[PQ])$/;    // 1 digit or 1 a-z or empty or 1 PQ
+
+Example:
+
+    reg = /^\w?$/;  //Zero or one
+    console.log( reg.test("a"));
+    console.log( reg.test(""));
+    console.log( reg.test("aaa"));
+
+    reg = /^\w*$/;  //Zero or more
+    console.log( reg.test("a"));
+    console.log( reg.test(""));
+    console.log( reg.test("aaa"));
+
+    reg = /^\w+$/;  //One or more
+    console.log( reg.test("a"));
+    console.log( reg.test(""));
+    console.log( reg.test("aaa"));
+
+Example: simple email
+ reg = /^\w+[@]\w+[.]\w+$/; 
+ console.log( reg.test( "aa@aa.in" )); // true
+ console.log( reg.test( "aa.aa@aa.in" )); // false
+
+Example: extended email
+reg = /^\w+([.]\w+)*[@](\w+[.]\w+)+$/;
+console.log( reg.test( "aa@aa.com" ));    
+console.log( reg.test( "aa@aa.co.in" ));
+console.log( reg.test( "aa.qq.rr@aa.co.in" ));
+
+
+ 
