@@ -1,0 +1,57 @@
+NodeJS and Git for Windows
+==========================
+1. Download "git" for window (google search) and install it. -- This is a "git" client software to create, clone, push    or pull reopsitory.
+
+2. Download NodeJS and install it. This is JavaScript Framework which includes JavaScript language + Runtime + Number of
+   JavaScript libraries and also allow us to download other Libraries of JavaScript via npm - NodeJS Package Manager    tool.
+
+3. Register the user account : www.github.com
+
+To verify the installation, open command prompt (cmd)  Win Key + R
+   >git
+        will dissplay command help if git client is installed.
+        [Note: IDEs like PHPstrome, Netbeans, Eclipse etc already have git clients]
+
+  >node
+  >name = 'Happy'
+  >console.log(name, name.length)
+
+    Press Ctrl + C two times to stop the "console".
+   
+
+Create a local repository
+=========================
+1. Open command prompt ( Win + R + (cmd) )
+2. Create a folder
+
+ e.g
+  c:\happy
+
+ c:\>md happy
+
+ c:\happy> 
+
+3. issue "git init" command
+ c:\happy>git init     
+
+      This command will create an empty repository.
+
+4. Add one or more files and commit the repository.
+
+  c:\happy>notepad first.txt
+  c:\happy>notepad sample.html
+  
+  c:\happy>git add first.txt
+  c:\happy>git add sample.html     OR you can use git add *.*
+  
+  c:\happy>git commit -m 'added'
+
+5. push the local repository to remote repo. Assume that we've https://github.com/happy8797/mywork.git ( Create "mywork"
+		git)
+
+  c:\happy>git remote origin master https://github.com/happy/8797/mywork.git
+  c:\jappy>git push -u origin master 
+
+6. Repeat step 4 to 5 if new files are added or changes in existing files.
+
+

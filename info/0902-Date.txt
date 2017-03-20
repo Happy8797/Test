@@ -1,0 +1,60 @@
+The Date Object
+================
+To represent the date (local date time) and also has methods to update the date part.
+
+Example:
+
+<script>
+  now = new Date();     //Current Date time
+  console.log( now );
+
+  dt = new Date(0);     // Epoch date time (a base date time) 1-1-1970 12:00:00
+  console.log( dt );
+
+  dt = new Date(1000);  // Create a date by passing milliseconds. 1 second = 1000 millis
+  console.log( dt );
+
+  ms =  Date.parse("2016-12-31");   //Parse string to Date - Date format must be ISO YYYY-mm-dd
+  console.log(ms);  //Millis
+
+ dt1 = new Date(ms);
+ console.log( dt1 );
+</script>
+
+Example:  Date part functions
+
+<script>
+    dt1 = new Date();
+
+    console.log(dt1.getDate());  // Day of month
+    console.log(dt1.getDay());   // Day of week
+    console.log(dt1.getMonth()); // 0 - Jan, 1 Feb
+    console.log(dt1.getYear());
+    console.log(dt1.getFullYear());
+    console.log(dt1.getUTCFullYear());
+    console.log(dt1.getTime()); // Millis
+    dt1.setDate(20);
+    dt1.setMonth(2); //3 month - Mar
+    console.log(dt1);
+</script>
+
+Example : Date diff
+
+<script>
+    dt1 = new Date();
+    dt2 = new Date(Date.parse("1971-12-5"));
+    console.log( dt1,dt2);
+
+    ms = dt1.getTime() - dt2.getTime();
+    console.log(ms + " ms");
+    console.log( (ms/1000) + " secs");
+    console.log( (ms/(1000*60)) + " min");
+    console.log( (ms/(1000*60*60)) + " hrs");
+    console.log( (ms/(1000*60*60*24)) + " days");
+    console.log( (ms/(1000*60*60*24*12)) + " months");
+    console.log( (ms/(1000*60*60*24*365)) + " years");
+</script>
+
+
+
+
