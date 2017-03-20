@@ -1,0 +1,431 @@
+Document Object Model Application Programming Interface - DOM API
+=================================================================
+
+DOM API is an interface API to access and manupilate the HTML object programatically (via JavaScript).
+
+We aleady know that each HTML tag in a web document will be transformed into an "object called HTML object" by the web-browser.
+
+Now, with the help of JavaScript language and the DOM API we will create new HTML objects and also manipulate them.
+
+DOM API methods
+===============
+
+The "document" object provide the DOM API methods.
+
+1. document.getElementsByTagName("element-name") -- This method returns a "NodeList" --- list of all HTML objects
+						    of given "element-name".
+2. NodeList object - The nodelist object contains two methods:
+			1. length - count of objects
+			2. item(index) - To returns an object of given index.
+
+And we know that the object can use . or [ ] to set or get properties/attributes. Use "Element" tab of Developer Tool to learn the name of HTML object properties/attributes.
+
+Example:
+
+<!doctype html>
+
+<body>
+ <h1>Head1</h1>
+ <h2>Head2</h2>
+ <p>Para</p>
+ <p>Para</p>
+ <h1>Heading1</h1>
+
+ <script>
+    var list = document.getElementsByTagName("h1");
+    console.log( list );
+
+    for(i=0;i<list.length;i++) {
+       var obj = list.item(i);
+       console.log( obj );
+
+       obj.style.color = "red";
+       obj["style"]["backgroundColor"] = "yellow";
+    }
+ </script>
+</body>
+
+
+3. dom.innerHTML -  to set/get the inner html content of object.
+	e.g
+		<h1>The <span>red</span> sun</h1> 
+                    |-----------------------|
+                         innerHTML
+
+                and the innerText represent only the "text" - means "The red sun".
+
+Example: (As per previous)
+.....
+.....
+   for(i=0;i<list.length;i++) {
+       var obj = list.item(i);
+       console.log( obj.innerHTML );
+       obj.innerHTML = "The <span>red</span> and <em>blue</em> sun  " + i;
+       console.log( obj.innerText );
+    }
+.....
+
+
+4. document.getElementsByName("name-attribute-value") - Returns the node list of given "name" atribute value.
+
+<div name="help">Line1</div>
+<div>Line2</div>
+<div name="help">Line2</div>
+
+<script>
+  var list = document.getElementsByName("help");
+  for(i=0;i<list.length;i++) {
+     list.item(i).style.color = "green";
+  }
+</script>
+
+5. document.getElementsByClassName("css-class-attribute-value") - Returns the node list of the given 'class' name.
+
+<div class="help">Line1</div>
+<div>Line2</div>
+<div class="help">Line2</div>
+<button name="help">Hello Button</button>
+<button class="help">Hello Button</button>
+<button class="box help">Help box</button>
+<script>
+  var list = document.getElementsByClassName("help");
+  for(i=0;i<list.length;i++) {
+     list.item(i).style.color = "green";
+  }
+</script>
+
+Example: Set "onclick" event handler for class="help" objects (previous example)
+...
+ list.item(i).onclick = function() {
+    console.log('Item clicked ' + i );
+ };
+...
+
+In this example, every click on "help" item will display 'Item clicked 4'. Now if we want to preserve the value of "i" variable then we must have to create the "closure".
+
+Update:
+ ...
+
+ for(i=0;i<list.length;i++) {
+     list.item(i).style.color = "green";
+     list.item(i).onclick =  myClosure(i);
+  }
+
+ function myClosure(i) {
+  return function() {
+      console.log('Item clicked ' + i);
+   }
+ }
+
+OR
+
+ var list = document.getElementsByClassName("help");
+  for(i=0;i<list.length;i++) {
+     list.item(i).style.color = "green";
+
+     list.item(i).onclick =   (function(index, obj) {
+        return function() {
+          console.log('Item pressed ' + index, obj);
+          if(obj.style.color == "green") {
+              obj.style.color = "black";
+          } else {
+              obj.style.color = "green";
+          }
+        }
+     })(i, list.item(i)); //Call it
+  }
+
+Example: Set/reset background color of <td>
+
+<!doctype html>
+
+<style>
+ table {
+  border-collapse: collapse;
+  border: 1px solid black;
+ }
+ td {
+  border: 1px solid black;
+  padding: 10px;
+}
+</style>
+<body>
+ <table>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>  
+ </table>
+<script>
+  var list = document.getElementsByTagName("td");
+  for(i=0;i<list.length;i++) {
+    var td = list.item(i);
+    td.onclick = myClosure( td );
+  }
+
+ function myClosure(obj) {
+   return function() {
+     if(obj.style.backgroundColor == "red") {
+         obj.style.backgroundColor = "white";
+     } else {
+         obj.style.backgroundColor = "red";
+     }
+   }
+ }
+</script>
+</body>
+
+
+Example:
+
+<!doctype html>
+
+<style>
+ table {
+  border-collapse: collapse;
+  border: 1px solid black;
+ }
+ td {
+  border: 1px solid black;
+  padding: 10px;
+}
+</style>
+<body>
+ <table>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>  
+ </table>
+<script>
+  var list = document.getElementsByTagName("td");
+  var ar = [];
+  for(i=0;i<list.length;i++) {
+    var td = list.item(i);
+    ar.push( td );
+  }
+
+ for(i=0;i<ar.length;i++) {
+    x = parseInt(Math.random() * ar.length);
+    y = parseInt(Math.random() * ar.length);
+    temp = ar[x]; ar[x] = ar[y]; ar[y] = temp;
+ }
+
+ for(i in ar ) {
+    td = ar[i];
+    setInterval( myClosure(td),  (Math.random() * 1000) + 100 );
+ }
+ 
+
+ function myClosure(obj) {
+   return function() {
+     if(obj.style.backgroundColor == "red") {
+         obj.style.backgroundColor = "white";
+     } else {
+         obj.style.backgroundColor = "red";
+     }
+   }
+ }
+
+</script>
+</body>
+
+Example:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+    </style>
+</head>
+<body>
+<h2 class="lion"> click me for Lion Image </h2>
+<h2 class="dog"> click me for Dog Image</h2>
+
+
+<script>
+    var list=document.getElementsByClassName('lion');
+    for(i=0;i<list.length;i++) {
+        var obj=list.item(i);
+        obj.onclick=myclo(obj);
+    }
+    function myclo(obj) {
+        return function () {
+            obj.style.backgroundImage='url("../htdocs/images/lion.jpg")';
+            obj.style.height='500px';
+            obj.style.position='hidden';
+        }
+    }
+    var dog=document.getElementsByClassName('dog');
+    for(i=0;i<list.length;i++) {
+        var obj2=dog.item(i);
+        obj2.onclick=myclo1(obj2);
+    }
+    function myclo1(obj2) {
+        var temp = obj2.innerHTML;
+        return function () {
+            obj2.style.backgroundImage='url("images/man.jpg")';
+            obj2.style.backgroundRepeat = "no-repeat";
+            obj2.style.height='500px';
+
+            // obj2.innerHTML = obj2.innerHTML ? "" : temp;
+            if(obj2.innerHTML) {
+                obj2.innerHTML = "";
+            } else {
+                obj2.innerHTML = temp;
+            }
+        }
+    }
+    //how to set no-repeat and padding between text and image. also how to hide text after click.
+</script>
+</body>
+</html>
+
+
+Example:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+       #img {
+           width: 900px;
+           height: 500px;
+           background: url(images/birds.jpg) no-repeat;
+           background-size: cover;
+           padding: 10px;
+
+           border-radius: 10px 10px 10px 10px;
+           border: 5px solid #aaa;
+       }
+    </style>
+</head>
+<body>
+ <div id="img"></div>
+
+<script>
+    var images = ["birds.jpg","man.jpg","khan.jpg"];
+    var img = document.getElementById("img");
+    index = 0;
+
+ function showImages() {
+    if(index >=images.length) {
+        index = 0;
+    }
+    img.style.background = "url(images/" + images[index] + ") no-repeat";
+    img.style.backgroundSize = "cover";
+    index++;
+    setTimeout( showImages, 1000);
+ }
+ showImages();
+</script>
+</body>
+</html>
+
+Example:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #quote {
+            border-left: 10px solid red;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+ <blockquote id="quote"></blockquote>
+
+<script>
+    var quotes = ["Where there is  a will thre is a way.","Man cannot stand before its shadow", "No body in the universe can teach who do not want to learn"];
+    var quote = document.getElementById("quote");
+    index = 0;
+
+ function showQuotes() {
+    if(index >=quotes.length) {
+        index = 0;
+    }
+    quote.innerHTML = quotes[index];
+
+    index++;
+    setTimeout( showQuotes, 1000);
+ }
+ showQuotes();
+</script>
+</body>
+</html>
+
+Example:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #quote {
+            border-left: 10px solid red;
+            padding: 20px;
+            background: #ff0;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+ <blockquote id="quote"></blockquote>
+
+<script>
+    var quotes = ["Where there is  a will thre is a way.","Man cannot stand before its shadow", "No body in the universe can teach who do not want to learn"];
+    var quote = document.getElementById("quote");
+    index = 0;
+    op = 1;
+
+ function showQuotes() {
+    if(index >=quotes.length) {
+        index = 0;
+    }
+    quote.innerHTML = quotes[index];
+    index++;
+    setTimeout( showQuotes, 2000);
+    setTimeout( anim , 1800);
+ }
+ showQuotes();
+
+ function anim() {
+     if(op<0) {
+         op = 1;
+         quote.style.opacity = op;
+         return;
+     }
+     op = op -0.1;
+     quote.style.opacity = op;
+     setTimeout( anim , 110);
+ }
+
+</script>
+</body>
+</html>
+
+
